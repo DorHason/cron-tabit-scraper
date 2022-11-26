@@ -80,7 +80,6 @@ const startRequest = () => {
       // once data is completly fetched do JSON.parse();
       console.log("No more data in response.");
       const results = JSON.parse(responseData);
-      console.log(results);
       const keys = Object.keys(results);
       if (keys.includes("reservation")) {
         console.log("reservation!");
@@ -89,7 +88,8 @@ const startRequest = () => {
       } else if (keys.includes("alternative_results")) {
         console.log("alternative_results...");
       } else {
-        console.log("error in response");
+        console.log("error in response:");
+        console.log(results);
         const emailText = "Error in app";
         sendEmail(emailText, emailText);
       }
@@ -97,6 +97,7 @@ const startRequest = () => {
   });
 
   req.on("error", (e) => {
+    console.log("error in request:");
     console.error(e);
   });
 

@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node cron-tabit-scraper.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,5 +13,8 @@
   "dependencies": {
     "node-cron": "^3.0.0",
     "nodemailer": "^6.8.0"
+  },
+  "engines": {
+    "node": "14.15.1"
   }
 }
