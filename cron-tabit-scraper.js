@@ -87,8 +87,6 @@ const startRequest = () => {
         sendEmail(emailText, emailText);
       } else if (keys.includes("alternative_results")) {
         console.log("alternative_results...");
-        const emailText = "Alternative results...";
-        sendEmail(emailText, emailText);
       } else {
         console.log("error in response:");
         console.log(results);
