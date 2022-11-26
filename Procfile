@@ -1,1 +1,1 @@
-web: node cron-tabit-scraper.js
+worker: node cron-tabit-scraper.js
