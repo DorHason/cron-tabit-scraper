@@ -75,7 +75,7 @@ const startRequest = (reservedFrom) => {
     rejectUnauthorized: false,
   };
 
-  console.log("Sending request");
+  console.log(`Sending request for ${reservedFrom}`);
 
   const req = https.request(reqOptions, (res) => {
     console.log(
@@ -92,7 +92,7 @@ const startRequest = (reservedFrom) => {
       const results = JSON.parse(responseData);
       const keys = Object.keys(results);
       if (keys.includes("reservation")) {
-        console.log("reservation!");
+        console.log("***** reservation! *****");
         const emailText = "Reservation is available";
         sendEmail(emailText, emailText);
       } else if (keys.includes("alternative_results")) {
@@ -101,18 +101,19 @@ const startRequest = (reservedFrom) => {
           const alternativeResults = results["alternative_results"];
           alternativeResults.forEach((result) => {
             if (result["title_timestamp"].includes("2022-12-13")) {
+              console.log("***** alternative reservation is available! *****");
               const emailText = "Reservation is available";
               sendEmail(emailText, result["title_timestamp"]);
             }
           });
         } catch (error) {
-          console.log("error in parsing alternative results:");
+          console.log("******* error in parsing alternative results: *******");
           console.log(error);
           const emailText = "Error in parsing alternative results";
           sendEmail(emailText, emailText);
         }
       } else {
-        console.log("error in response:");
+        console.log("******* error in response: *******");
         console.log(results);
         const emailText = "Error in app";
         sendEmail(emailText, emailText);
@@ -121,7 +122,7 @@ const startRequest = (reservedFrom) => {
   });
 
   req.on("error", (e) => {
-    console.log("Error in request:");
+    console.log("******* Error in request: *******");
     console.error(e);
   });
 
