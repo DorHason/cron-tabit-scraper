@@ -2,8 +2,15 @@ const cron = require("node-cron");
 const https = require("https");
 const nodemailer = require("nodemailer");
 
+const optionA = "2022-12-13T16:00:00.000Z";
+const optionB = "2022-12-13T19:00:00.000Z";
+
 cron.schedule("* 8-23 * * *", () => {
-  startRequest();
+  startRequest(optionA);
+});
+
+cron.schedule("* 8-23 * * *", () => {
+  startRequest(optionB);
 });
 
 cron.schedule("0 */12 * * *", () => {
@@ -38,7 +45,7 @@ const sendEmail = (subject, body) => {
   });
 };
 
-const startRequest = () => {
+const startRequest = (reservedFrom) => {
   const reqData = {
     organization: "613f0d252587d979ae0aa702",
     type: "future_reservation",
@@ -46,7 +53,7 @@ const startRequest = () => {
     seats_count: 2,
     preference: "inside",
     arriving_within: null,
-    reserved_from: "2022-12-13T16:00:00.000Z",
+    reserved_from: reservedFrom,
     online_booking_source_client: {
       name: "tabit-web",
       environment: "il-prod-beta",
@@ -68,9 +75,12 @@ const startRequest = () => {
     rejectUnauthorized: false,
   };
 
+  console.log("Sending request");
+
   const req = https.request(reqOptions, (res) => {
-    console.log("statusCode:", res.statusCode);
-    console.log("headers:", res.headers);
+    console.log(
+      `Received response for ${reservedFrom}. Status code: ${res.statusCode}`
+    );
     res.setEncoding("utf8");
     let responseData = "";
     res.on("data", (d) => {
@@ -97,7 +107,7 @@ const startRequest = () => {
   });
 
   req.on("error", (e) => {
-    console.log("error in request:");
+    console.log("Error in request:");
     console.error(e);
   });
 
