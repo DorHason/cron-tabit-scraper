@@ -3,15 +3,15 @@ const https = require("https");
 const nodemailer = require("nodemailer");
 
 const optionA = "2022-12-13T16:00:00.000Z";
-const optionB = "2022-12-13T19:00:00.000Z";
+// const optionB = "2022-12-13T19:00:00.000Z";
 
 cron.schedule("* 8-23 * * *", () => {
   startRequest(optionA);
 });
 
-cron.schedule("* 8-23 * * *", () => {
-  startRequest(optionB);
-});
+// cron.schedule("* 8-23 * * *", () => {
+//   startRequest(optionB);
+// });
 
 cron.schedule("0 */12 * * *", () => {
   sendEmail("keepAlive", "app is still running");
@@ -97,6 +97,20 @@ const startRequest = (reservedFrom) => {
         sendEmail(emailText, emailText);
       } else if (keys.includes("alternative_results")) {
         console.log("alternative_results...");
+        try {
+          const alternativeResults = results["alternative_results"];
+          alternativeResults.forEach((result) => {
+            if (result["title_timestamp"].includes("2022-12-13")) {
+              const emailText = "Reservation is available";
+              sendEmail(emailText, result["title_timestamp"]);
+            }
+          });
+        } catch (error) {
+          console.log("error in parsing alternative results:");
+          console.log(error);
+          const emailText = "Error in parsing alternative results";
+          sendEmail(emailText, emailText);
+        }
       } else {
         console.log("error in response:");
         console.log(results);
