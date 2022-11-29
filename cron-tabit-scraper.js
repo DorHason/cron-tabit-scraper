@@ -3,15 +3,15 @@ const https = require("https");
 const nodemailer = require("nodemailer");
 
 const optionA = "2022-12-13T16:00:00.000Z";
-// const optionB = "2022-12-13T19:00:00.000Z";
+const optionB = "2022-12-12T19:00:00.000Z";
 
 cron.schedule("* 8-23 * * *", () => {
   startRequest(optionA);
 });
 
-// cron.schedule("* 8-23 * * *", () => {
-//   startRequest(optionB);
-// });
+cron.schedule("* 8-23 * * *", () => {
+  startRequest(optionB);
+});
 
 cron.schedule("0 */12 * * *", () => {
   sendEmail("keepAlive", "app is still running");
