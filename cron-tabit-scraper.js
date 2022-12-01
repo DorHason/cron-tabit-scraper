@@ -13,9 +13,9 @@ const optionB = "2022-12-12T16:00:00.000Z";
 //   startRequest(optionB);
 // });
 
-cron.schedule("0 */12 * * *", () => {
-  sendEmail("keepAlive", "app is still running");
-});
+// cron.schedule("0 */12 * * *", () => {
+//   sendEmail("keepAlive", "app is still running");
+// });
 
 const sendEmail = (subject, body) => {
   const emailClient = nodemailer.createTransport({
