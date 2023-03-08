@@ -6,25 +6,17 @@ const nodemailer = require("nodemailer");
 const optionA = "2023-03-20T16:00:00.000Z";
 const optionB = "2022-12-12T16:00:00.000Z";
 
-// console.log("app has started!");
-
-// cron.schedule
-
-// cron.schedule("* * * * *", () => {
-// //   startRequest(optionA);
-//   console.log("inside cron");
-//   sendEmail("inside cron", "inside cron!");
-// });
+cron.schedule("* 8-23 * * *", () => {
+  startRequest(optionA);
+});
 
 // cron.schedule("* 8-23 * * *", () => {
 //   startRequest(optionB);
 // });
 
-// "0 */12 * * *"
-
-// cron.schedule("* 8-23 * * *", () => {
-//   sendEmail("keepAlive", "app is still running");
-// });
+cron.schedule("0 */12 * * *", () => {
+  sendEmail("keepAlive", "app is still running");
+});
 
 const sendEmail = (subject, body) => {
   const emailClient = nodemailer.createTransport({
@@ -138,23 +130,3 @@ const startRequest = (reservedFrom) => {
   req.write(reqDataJSON);
   req.end();
 };
-
-sendEmail("appStarted", "app has started");
-
-http.createServer(function (req, res) {
-    if (req.url.includes("favicon")) {
-          res.write('favicon');
-          res.end();
-          return;
-    }
-    if (req.url.includes("keep-alive")) {
-        sendEmail("keepAlive", "app is still running");
-        res.write('alive');
-        res.end();
-        return;
-    }
-    startRequest(optionA);
-    console.log("sent request");
-    res.write('Sent request');
-    res.end();
-}).listen(process.env.PORT || 3000);
