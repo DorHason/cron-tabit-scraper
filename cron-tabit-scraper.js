@@ -1,5 +1,6 @@
 const cron = require("node-cron");
 const https = require("https");
+const http = require("http");
 const nodemailer = require("nodemailer");
 
 const optionA = "2023-03-20T16:00:00.000Z";
@@ -134,3 +135,9 @@ const startRequest = (reservedFrom) => {
   req.write(reqDataJSON);
   req.end();
 };
+
+http.createServer(function (req, res) {
+    console.log(`Just got a request at ${req.url}!`)
+    res.write('Yo!');
+    res.end();
+}).listen(process.env.PORT || 3000);
