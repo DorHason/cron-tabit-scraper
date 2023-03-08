@@ -1,6 +1,5 @@
 const cron = require("node-cron");
 const https = require("https");
-const express = require('express');
 const nodemailer = require("nodemailer");
 
 const optionA = "2023-03-20T16:00:00.000Z";
@@ -12,13 +11,13 @@ cron.schedule("* * * * *", () => {
   startRequest(optionA);
 });
 
-// cron.schedule("* 8-23 * * *", () => {
-//   startRequest(optionB);
-// });
+cron.schedule("* 8-23 * * *", () => {
+  startRequest(optionA);
+});
 
-// cron.schedule("0 */12 * * *", () => {
-//   sendEmail("keepAlive", "app is still running");
-// });
+cron.schedule("0 */12 * * *", () => {
+  sendEmail("keepAlive", "app is still running");
+});
 
 const sendEmail = (subject, body) => {
   const emailClient = nodemailer.createTransport({
@@ -132,13 +131,3 @@ const startRequest = (reservedFrom) => {
   req.write(reqDataJSON);
   req.end();
 };
-
-const app = express();
-
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
-});
-
-app.listen(3000, () => {
-  console.log('Web server started on port 3000');
-});
