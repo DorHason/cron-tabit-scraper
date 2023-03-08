@@ -7,6 +7,7 @@ const optionA = "2023-03-20T16:00:00.000Z";
 const optionB = "2022-12-12T16:00:00.000Z";
 
 cron.schedule("* * * * *", () => {
+  console.log("cron is running");
   sendEmail("keepAlive", "app is still running!!!");
   startRequest(optionA);
 });
