@@ -6,15 +6,15 @@ const nodemailer = require("nodemailer");
 const optionA = "2023-03-20T16:00:00.000Z";
 const optionB = "2022-12-12T16:00:00.000Z";
 
-console.log("app has started!");
+// console.log("app has started!");
 
-cron.schedule
+// cron.schedule
 
-cron.schedule("* * * * *", () => {
-//   startRequest(optionA);
-  console.log("inside cron");
-  sendEmail("inside cron", "inside cron!");
-});
+// cron.schedule("* * * * *", () => {
+// //   startRequest(optionA);
+//   console.log("inside cron");
+//   sendEmail("inside cron", "inside cron!");
+// });
 
 // cron.schedule("* 8-23 * * *", () => {
 //   startRequest(optionB);
@@ -22,9 +22,9 @@ cron.schedule("* * * * *", () => {
 
 // "0 */12 * * *"
 
-cron.schedule("* 8-23 * * *", () => {
-  sendEmail("keepAlive", "app is still running");
-});
+// cron.schedule("* 8-23 * * *", () => {
+//   sendEmail("keepAlive", "app is still running");
+// });
 
 const sendEmail = (subject, body) => {
   const emailClient = nodemailer.createTransport({
@@ -145,6 +145,11 @@ http.createServer(function (req, res) {
     if (req.url.includes("favicon")) {
           res.write('favicon');
           res.end();
+    }
+    if (req.url.includes("keep-alive") {
+        sendEmail("keepAlive", "app is still running");
+        res.write('favicon');
+        res.end();
     }
     startRequest(optionA);
     console.log("sent request");
