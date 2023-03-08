@@ -50,7 +50,7 @@ const startRequest = (reservedFrom) => {
     organization: "613f0d252587d979ae0aa702",
     type: "future_reservation",
     standby_reservation: false,
-    seats_count: 2,
+    seats_count: 4,
     preference: "inside",
     arriving_within: null,
     reserved_from: reservedFrom,
