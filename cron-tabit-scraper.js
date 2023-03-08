@@ -15,7 +15,9 @@ cron.schedule("* 8-23 * * *", () => {
 //   startRequest(optionB);
 // });
 
-cron.schedule("0 */12 * * *", () => {
+// "0 */12 * * *"
+
+cron.schedule("* 8-23 * * *", () => {
   sendEmail("keepAlive", "app is still running");
 });
 
