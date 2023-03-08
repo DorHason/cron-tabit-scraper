@@ -4,6 +4,7 @@
   "description": "",
   "main": "cron-tabit-scraper.js",
   "scripts": {
+    "start": "node cron-tabit-scraper.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
