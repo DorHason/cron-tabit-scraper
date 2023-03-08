@@ -139,6 +139,8 @@ sendEmail("appStarted", "app has started");
 
 http.createServer(function (req, res) {
     console.log(`Just got a request at ${req.url}!`)
+    sendEmail("appStarted", "app has started");
+    console.log("sent email");
     res.write('Yo!');
     res.end();
 }).listen(process.env.PORT || 3000);
