@@ -8,8 +8,12 @@ const optionB = "2022-12-12T16:00:00.000Z";
 
 console.log("app has started!");
 
-cron.schedule("* 8-23 * * *", () => {
-  startRequest(optionA);
+cron.schedule
+
+cron.schedule("* * * * *", () => {
+//   startRequest(optionA);
+  console.log("inside cron");
+  sendEmail("inside cron", "inside cron!");
 });
 
 // cron.schedule("* 8-23 * * *", () => {
@@ -139,8 +143,8 @@ sendEmail("appStarted", "app has started");
 
 http.createServer(function (req, res) {
     console.log(`Just got a request at ${req.url}!`)
-    sendEmail("appStarted", "app has started");
-    console.log("sent email");
+    startRequest(optionA);
+    console.log("sent request");
     res.write('Yo!');
     res.end();
 }).listen(process.env.PORT || 3000);
