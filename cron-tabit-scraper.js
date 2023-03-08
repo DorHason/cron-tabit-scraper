@@ -5,13 +5,13 @@ const nodemailer = require("nodemailer");
 const optionA = "2023-03-20T16:00:00.000Z";
 const optionB = "2022-12-12T16:00:00.000Z";
 
-cron.schedule("* 8-23 * * *", () => {
+cron.schedule("* 6-23 * * *", () => {
   startRequest(optionA);
 });
 
-cron.schedule("* 8-23 * * *", () => {
-  startRequest(optionA);
-});
+// cron.schedule("* 6-23 * * *", () => {
+//   startRequest(optionB);
+// });
 
 cron.schedule("0 */12 * * *", () => {
   sendEmail("keepAlive", "app is still running");
