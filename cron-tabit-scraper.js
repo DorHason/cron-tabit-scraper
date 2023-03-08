@@ -142,9 +142,12 @@ const startRequest = (reservedFrom) => {
 sendEmail("appStarted", "app has started");
 
 http.createServer(function (req, res) {
-    console.log(`Just got a request at ${req.url}!`)
+    if (req.url.includes("favicon")) {
+          res.write('favicon');
+          res.end();
+    }
     startRequest(optionA);
     console.log("sent request");
-    res.write('Yo!');
+    res.write('Sent request');
     res.end();
 }).listen(process.env.PORT || 3000);
