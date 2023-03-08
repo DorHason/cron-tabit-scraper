@@ -7,7 +7,6 @@ const optionA = "2023-03-20T16:00:00.000Z";
 const optionB = "2022-12-12T16:00:00.000Z";
 
 console.log("app has started!");
-sendEmail("appStarted", "app has started");
 
 cron.schedule("* 8-23 * * *", () => {
   startRequest(optionA);
@@ -135,6 +134,8 @@ const startRequest = (reservedFrom) => {
   req.write(reqDataJSON);
   req.end();
 };
+
+sendEmail("appStarted", "app has started");
 
 http.createServer(function (req, res) {
     console.log(`Just got a request at ${req.url}!`)
