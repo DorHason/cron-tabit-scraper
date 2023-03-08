@@ -145,11 +145,13 @@ http.createServer(function (req, res) {
     if (req.url.includes("favicon")) {
           res.write('favicon');
           res.end();
+          return;
     }
     if (req.url.includes("keep-alive")) {
         sendEmail("keepAlive", "app is still running");
-        res.write('favicon');
+        res.write('alive');
         res.end();
+        return;
     }
     startRequest(optionA);
     console.log("sent request");
